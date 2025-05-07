@@ -1,3 +1,5 @@
+import Score from "./ScoreTemplate";
+
 interface GameOverProps {
   returnStartScreen: (score: number) => void;
   retry: () => void;
@@ -9,8 +11,8 @@ const GameOver = ({returnStartScreen, retry, score, prevScore}: GameOverProps) =
     return (
       <div>
         <p>Fim de jogo!</p>
-        <p>Pontuação do jogo: {score}</p>
-        <p>Pontuação do jogo anterior: {prevScore}</p>
+        <Score score={score} prevScore={false} applyDropShadow={true}/>
+        <Score score={prevScore} prevScore={true} applyDropShadow={false}/>
         <button onClick={retry}>Jogar novamente</button>
         <button onClick={() => returnStartScreen(score)}>Encerrar o jogo</button>
       </div>

@@ -1,4 +1,4 @@
-import './App.css'
+import './App.css';
 import { useCallback, useEffect, useState } from 'react';
 
 import StartScreen from './components/StartScreen';
@@ -58,7 +58,7 @@ function App() {
     const normalizedLetter = letter.toLowerCase();
     if(guessedLetters.includes(normalizedLetter) || wrongLetters.includes(normalizedLetter)){
       return;
-      
+
     }
 
     if(letters.includes(normalizedLetter)) {
@@ -121,8 +121,10 @@ function App() {
   }
 
   return (
-    <div className="App">
-      <h2>Secret word</h2>
+    <div className="w-full md:w-auto py-20 px-20 flex flex-col justify-center items-center">
+      <div className='bg-sky-950 border-3 border-solid border-sky-400 drop-shadow-sky-400/50 drop-shadow-[0_0_10px] rounded-lg p-5 mb-5'>
+        <h2 className='text-center text-3xl text-sky-400 drop-shadow-sky-400/50 drop-shadow-[0_0_7px] font-bold title'>Adivinhe a palavra secreta</h2>
+      </div>
       {gameStage === 'start' ? <StartScreen startGame={startGame} prevScore={prevScore}/> : gameStage === 'game' 
       ? <Game 
           verifyLetter={verifyLetter}
