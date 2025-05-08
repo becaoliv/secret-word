@@ -6,6 +6,7 @@ import Game from './components/Game';
 import GameOver from './components/GameOver';
 
 import { wordList } from './data/words';
+import Score from './components/ScoreTemplate';
 
 type WordList = typeof wordList;
 type Category = keyof WordList;
@@ -58,7 +59,6 @@ function App() {
     const normalizedLetter = letter.toLowerCase();
     if(guessedLetters.includes(normalizedLetter) || wrongLetters.includes(normalizedLetter)){
       return;
-
     }
 
     if(letters.includes(normalizedLetter)) {
@@ -98,7 +98,6 @@ function App() {
       }
       startGame();
     }
-
   }, [guessedLetters, letters, startGame]);
   
   const retry = () => {
@@ -121,11 +120,17 @@ function App() {
   }
 
   return (
-    <div className="w-full md:w-auto py-20 px-20 flex flex-col justify-center items-center">
-      <div className='bg-sky-950 border-3 border-solid border-sky-400 drop-shadow-sky-400/50 drop-shadow-[0_0_10px] rounded-lg p-5 mb-5'>
-        <h2 className='text-center text-3xl text-sky-400 drop-shadow-sky-400/50 drop-shadow-[0_0_7px] font-bold title'>Adivinhe a palavra secreta</h2>
+    <div className="w-screen py-10 px-10 flex flex-col items-center h-dvh">
+      <div className='w-full flex flex-row justify-between'>
+        <div className='bg-sky-950 border-3 border-solid border-sky-400 drop-shadow-sky-400/50 drop-shadow-[0_0_10px] rounded-lg p-3 mb-5'>
+          <h2 className='text-center text-3xl text-sky-400 drop-shadow-sky-400/50 drop-shadow-[0_0_7px] font-bold title'>Adivinhe a palavra secreta</h2>
+        </div>
+        <div className="flex flex-row">
+            <Score score={score} prevScore={false} applyDropShadow={true}/>
+            <Score score={prevScore} prevScore={true} applyDropShadow={false}/>
+        </div>
       </div>
-      {gameStage === 'start' ? <StartScreen startGame={startGame} prevScore={prevScore}/> : gameStage === 'game' 
+      {gameStage === 'start' ? <StartScreen startGame={startGame}/> : gameStage === 'game' 
       ? <Game 
           verifyLetter={verifyLetter}
           pickedCategory={pickedCategory} 
@@ -133,6 +138,7 @@ function App() {
           guessedLetters={guessedLetters}
           wrongLetters={wrongLetters}
           guesses={guesses}
+          guessesQty={guessesQty}
           score={score}
           returnStartScreen={returnStartScreen}
           prevScore={prevScore}

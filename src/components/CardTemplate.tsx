@@ -1,10 +1,14 @@
+import clsx from "clsx";
+import { twMerge } from "tailwind-merge";
+
 interface CardTemplateProps {
-    children: React.ReactNode
+  additionalClasses: string;
+  children: React.ReactNode;
 }
 
-const CardTemplate = ({children}: CardTemplateProps) => {
+const CardTemplate = ({additionalClasses, children}: CardTemplateProps) => {
   return (
-    <div className="bg-gray-800 rounded-sm shadow-lg p-7">
+    <div className={twMerge(clsx(additionalClasses, "bg-gray-800 rounded-sm shadow-lg p-7 text-gray-300 mb-4"))}>
         {children}
     </div>
   )
